@@ -25,14 +25,13 @@ func init() {
 // > retrying...
 // > it's ok
 func Retry(f func() error) {
-	var d time.Duration
 	trial := uint8(0)
 
 	err := f()
 	for err != nil {
 		fmt.Println(err)
 
-		d = delay(trial)
+		d := delay(trial)
 		fmt.Printf("sleeping for %v...\n", d)
 		time.Sleep(d)
 
