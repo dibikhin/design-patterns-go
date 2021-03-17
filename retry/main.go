@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"os"
 	"time"
 
 	r "retry/retry"
@@ -29,6 +30,7 @@ func main() {
 	maxTrial := uint8(1 << 5)
 	err := r.Retry(maxTrial, job)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(os.Stderr, err)
+		os.Exit(1)
 	}
 }

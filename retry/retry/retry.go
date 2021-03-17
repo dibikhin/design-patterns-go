@@ -33,14 +33,14 @@ func Retry(maxTrial uint8, f func() error) error {
 	err := errors.New("dummy")
 	for err != nil {
 		if trial > maxTrial {
-			return errors.New("trials exceeded")
+			return errors.New("trials exceeded") // TODO add trial
 		}
 		err = f()
 		if err == nil {
 			fmt.Println("Finished.")
 			return nil
 		}
-		fmt.Printf("err: %v\n", err)
+		fmt.Printf("Error detected: %v\n", err)
 		fmt.Println("Retrying...")
 
 		d := delay(trial)
